@@ -27,6 +27,8 @@ As interesting as EIP-2612 sounds, not all major ERC20s [support](https://help.1
 A contract interface that enables transferring of fungible assets via a signed authorization. USDC might allow EIP-3009. More research will follow.
 
 
+## TODO: EIP-1271: Standard Signature Validation Method for Contracts
+
 ## References to note
 
 | EIP  | Reference |
