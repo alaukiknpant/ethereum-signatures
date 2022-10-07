@@ -1,0 +1,21 @@
+name: CI
+on: push
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: install
+        uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install
+      - name: compile
+        run: yarn hardhat compile
+      - name: test
+        run: yarn hardhat test
+      - name: deploy
+        run: yarn hardhat run scripts/deploy.ts
