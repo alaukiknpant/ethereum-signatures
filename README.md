@@ -1,8 +1,5 @@
 # Signing Messages in Ethereum
- 
 
-
-## EIP-712: Typed structured data hashing and signing
 
 EIP is a peer-reviewed and improved way of off-chain message signing for use on-chain. Off-chain signing is useful as it saves gas and reduces the number of transactions on the blockchain. What kind of messages can we sign? Ethereum has two kinds of messages
 1. transactions 𝕋 - signed using eth_sendTransaction
@@ -10,14 +7,17 @@ EIP is a peer-reviewed and improved way of off-chain message signing for use on-
 
 You might be interested in sigining transactions for, say, approving an ERC20 token for a contract to use. Anoer example includes Opensea where you can leave an offer to buy an item by signing a transaction. But on-chain it will be approved only when the seller selects 1 of the offers, and then accepts it, by paying for the broadcast.
 
-You might be interested in signing messages to agree to the terms and conditions of a platform.
+You might be interested in signing messages to agree to the terms and conditions of a platform. This repo explores how messages are signed in ethereum using the EIP712 standard. In particular, we explore signing messages to vote on behalf of a user using EIP-712 and permitting a ERC-20 token approval using EIP-2612.
 
 
+## EIP-712: Typed structured data hashing and signing
+
+`EIP712Sample.sol` explores signing a message on behalf of another user off chain.
 
 
 ## EIP-2612: EIP-20 Permit Extension: Signed Approvals
 
-In order to interact with ERC20 tokens via smart contracts, users have to `approve()` the smart contract, which in turn invokes a `transferFrom()`. Given this flow, [even in the simple use case of paying another person, they need to hold ETH to pay for transaction gas costs. ERC-2612 extends the EIP-20 standard with a new function permit, which allows users to modify the allowance mapping using a signed message, instead of through msg.sender. The signed data is structured following EIP-712, which already has wide spread adoption in major RPC providers](https://eips.ethereum.org/EIPS/eip-2612).
+`ERC20PermitSample` explores this. In order to interact with ERC20 tokens via smart contracts, users have to `approve()` the smart contract, which in turn invokes a `transferFrom()`. Given this flow, [even in the simple use case of paying another person, they need to hold ETH to pay for transaction gas costs. ERC-2612 extends the EIP-20 standard with a new function permit, which allows users to modify the allowance mapping using a signed message, instead of through msg.sender. The signed data is structured following EIP-712, which already has wide spread adoption in major RPC providers](https://eips.ethereum.org/EIPS/eip-2612).
 
 As interesting as EIP-2612 sounds, not all major ERC20s [support](https://help.1inch.io/en/articles/5435386-permit-712-signed-token-approvals-and-how-they-work-on-1inch) this standard, namely USDC and USDT. DAI was an early adopter of EIP-2612. The code in this repo demonstrates using EIP-2612.
 
